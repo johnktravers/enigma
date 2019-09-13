@@ -20,4 +20,10 @@ module Shiftable
     }
   end
 
+  def get_shifts
+    get_keys.merge!(get_offsets) do |letter, key, offset|
+      key + offset
+    end
+  end
+
 end

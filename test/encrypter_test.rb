@@ -38,6 +38,9 @@ class EncrypterTest < Minitest::Test
     assert_equal expected, @encrypter_1.get_offsets
   end
 
-
+  def test_get_shifts
+    expected = { a: 63, b: 71, c: 35, d: 15 }
+    assert_equal expected, @encrypter_1.get_shifts
+  end
 
 end

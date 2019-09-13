@@ -12,17 +12,17 @@ class ShiftableTest < Minitest::Test
   end
 
   def test_get_keys
-    expected = { a: 56, b: 63, c: 30, d: 9 }
+    expected = [56, 63, 30, 9]
     assert_equal expected, @encrypter.get_keys
   end
 
   def test_get_offsets
-    expected = { a: 7, b: 8, c: 5, d: 6 }
+    expected = [7, 8, 5, 6]
     assert_equal expected, @encrypter.get_offsets
   end
 
   def test_get_shifts
-    expected = { a: 63, b: 71, c: 35, d: 15 }
+    expected = [63, 71, 35, 15]
     assert_equal expected, @encrypter.get_shifts
   end
 

@@ -28,6 +28,16 @@ class EncrypterTest < Minitest::Test
     assert_equal "130919", @encrypter_2.date
   end
 
+  def test_get_keys
+    expected = { a: 56, b: 63, c: 30, d: 9 }
+    assert_equal expected, @encrypter_1.get_keys
+  end
+
+  def test_get_offsets
+    expected = { a: 7, b: 8, c: 5, d: 6 }
+    assert_equal expected, @encrypter_1.get_offsets
+  end
+
 
 
 end

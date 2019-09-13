@@ -1,8 +1,7 @@
 class RandomNumberGenerator
-  attr_reader :all_numbers
 
-  def initialize
-    @all_numbers = %w(0 1 2 3 4 5 6 7 8 9)
+  def get_number
+    rand(100000).to_s.rjust(5, '0')
   end
 
 end

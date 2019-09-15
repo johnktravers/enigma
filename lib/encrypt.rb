@@ -1,7 +1,9 @@
 require './lib/enigma'
 
 if ARGV.length != 2
-  puts "Please give file paths for the message and desired encyption."
+  puts "Please give two command line arguments:"
+  puts "  1) File name of message (.txt extension)"
+  puts "  2) Desired file name of encrypted message (.txt extension)"
   exit
 end
 

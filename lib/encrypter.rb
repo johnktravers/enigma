@@ -1,20 +1,15 @@
-require 'date'
 require './lib/shiftable'
-require './lib/random_number_generator'
 
 class Encrypter
   include Shiftable
 
   attr_reader :message, :key, :date
 
-  def initialize(message,
-                 key = RandomNumberGenerator.get_number,
-                 date = Date.today.strftime('%d%m%y'))
+  def initialize(message, key, date)
     @message = message
     @key = key
     @date = date
     @alphabet = ('a'..'z').to_a << ' '
-
   end
 
   def shift_message

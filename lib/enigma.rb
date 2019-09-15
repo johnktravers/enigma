@@ -16,7 +16,7 @@ class Enigma
       date: date }
   end
 
-  def decrypt(message, key, date)
+  def decrypt(message, key, date = Date.today.strftime('%d%m%y'))
     decrypter = Decrypter.new(message, key, date)
 
     { decryption: decrypter.decrypt_message,

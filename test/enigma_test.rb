@@ -16,6 +16,9 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, @enigma
   end
 
+
+  #-----------Encrypt Tests-----------#
+
   def test_encrypt_with_message_key_and_date
     expected = {
       encryption: 'keder ohulw',
@@ -48,6 +51,9 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.encrypt('Hello Universe!')
   end
 
+
+  #-----------Decrypt Tests-----------#
+
   def test_decrypt_with_message_key_and_date
     expected = {
       decryption: 'hello world',
@@ -55,6 +61,17 @@ class EnigmaTest < Minitest::Test
       date: '040895'
     }
     assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+  end
+
+  def test_decrypt_with_message_and_key
+    Date.expects(:today).returns(Date.new(1985, 11, 16))
+
+    expected = {
+      decryption: 'why hello there.',
+      key: '02715',
+      date: '161185'
+    }
+    assert_equal expected, @enigma.decrypt('bjqtngdeublaktx.', '02715')
   end
 
 end

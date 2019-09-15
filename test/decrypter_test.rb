@@ -22,7 +22,7 @@ class DecrypterTest < Minitest::Test
   end
 
   def test_unshift_message
-    assert_equal 'hello world', @decrypter.shift_message
+    assert_equal 'hello world', @decrypter.unshift_message
   end
 
 end

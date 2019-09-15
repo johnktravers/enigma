@@ -3,6 +3,7 @@ SimpleCov.start
 
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha/minitest'
 require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
@@ -17,11 +18,23 @@ class EnigmaTest < Minitest::Test
 
   def test_encrypt
     expected = {
-      encryption: "keder ohulw",
-      key: "02715",
-      date: "040895"
+      encryption: 'keder ohulw',
+      key: '02715',
+      date: '040895'
     }
-    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+    assert_equal expected, @enigma.encrypt('hello world', '02715', '040895')
+  end
+
+  def test_encrypt_with_message_only
+    RandomNumberGenerator.expects(:get_number).returns('12345')
+    Date.expects(:today).returns(Date.new(2019, 6, 17))
+
+    expected = {
+      encryption: 'wbydcxgfxsrjgb!',
+      key: '12345',
+      date: '170619'
+    }
+    assert_equal expected, @enigma.encrypt('Hello Universe!')
   end
 
 end

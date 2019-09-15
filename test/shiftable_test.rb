@@ -8,22 +8,23 @@ require './lib/encrypter'
 class ShiftableTest < Minitest::Test
 
   def setup
-    @encrypter = Encrypter.new("Hello, world!", "56309", "250684")
+    @encrypter = Encrypter.new('HEllO woRLd eNd', '08304', '291018')
   end
 
   def test_get_keys
-    expected = [56, 63, 30, 9]
-    assert_equal expected, @encrypter.get_keys
+    assert_equal [8, 83, 30, 4], @encrypter.get_keys
   end
 
   def test_get_offsets
-    expected = [7, 8, 5, 6]
-    assert_equal expected, @encrypter.get_offsets
+    assert_equal [6, 3, 2, 4], @encrypter.get_offsets
   end
 
   def test_get_shifts
-    expected = [63, 71, 35, 15]
-    assert_equal expected, @encrypter.get_shifts
+    assert_equal [14, 86, 32, 8], @encrypter.get_shifts
+  end
+
+  def test_shift_message
+    assert_equal 'vjqtbeaweqihssi', @encrypter.shift_message([14, 86, 32, 8])
   end
 
 end

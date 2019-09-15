@@ -10,7 +10,7 @@ class Enigma
 
     encrypter = Encrypter.new(message, key, date)
 
-    { encryption: encrypter.shift_message,
+    { encryption: encrypter.encrypt_message,
       key: key,
       date: date }
   end

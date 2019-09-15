@@ -21,8 +21,8 @@ class EncrypterTest < Minitest::Test
     assert_equal '291018', @encrypter.date
   end
 
-  def test_shift_message
-    assert_equal 'vjqtbeaweqihssi', @encrypter.shift_message
+  def test_encrypt_message
+    assert_equal 'vjqtbeaweqihssi', @encrypter.encrypt_message
   end
 
 end

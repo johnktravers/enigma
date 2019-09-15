@@ -21,8 +21,8 @@ class DecrypterTest < Minitest::Test
     assert_equal '040895', @decrypter.date
   end
 
-  def test_unshift_message
-    assert_equal 'hello world', @decrypter.unshift_message
+  def test_decrypt_message
+    assert_equal 'hello world', @decrypter.decrypt_message
   end
 
 end

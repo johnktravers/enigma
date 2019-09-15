@@ -27,4 +27,19 @@ module Shiftable
     shifts
   end
 
+  def shift_message(shifts)
+    alphabet = ('a'..'z').to_a << ' '
+    shifted_message = @message.downcase.split('')
+
+    shifted_message.each_with_index do |char, index|
+      if alphabet.include?(char)
+        alpha_index = alphabet.index(char)
+        shifted_alpha = alphabet.rotate(shifts[index % 4])
+        shifted_message[index] = shifted_alpha[alpha_index]
+      end
+    end
+
+    shifted_message.join('')
+  end
+
 end

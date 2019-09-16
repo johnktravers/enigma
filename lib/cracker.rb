@@ -82,7 +82,11 @@ class Cracker
 
   def create_crack_key(keys)
     aligned = align_keys(keys)
-    aligned[0] + aligned[1][1] + aligned[2][1] + aligned[3][1]
+    if aligned.length == 4
+      aligned[0] + aligned[1][1] + aligned[2][1] + aligned[3][1]
+    else
+      'No key found'
+    end
   end
 
 end

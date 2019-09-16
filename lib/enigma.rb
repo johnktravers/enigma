@@ -24,4 +24,14 @@ class Enigma
       date: date }
   end
 
+  def crack(ciphertext, date)
+    key = '99999'
+
+    100000.times do
+      attempt = decrypt(ciphertext, key, date)
+      return attempt if attempt[:decryption][-4..-1] == ' end'
+      key = (key.to_i - 1).to_s.rjust(5, '0')
+    end
+  end
+
 end

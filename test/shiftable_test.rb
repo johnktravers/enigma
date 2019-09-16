@@ -24,7 +24,7 @@ class ShiftableTest < Minitest::Test
   end
 
   def test_shift_text
-    actual = @encrypter.shift_text(@encrypter.message, [14, 86, 32, 8])
+    actual = @encrypter.shift_text('HEllO woRLd eNd', [14, 86, 32, 8])
     assert_equal 'vjqtbeaweqihssi', actual
   end
 

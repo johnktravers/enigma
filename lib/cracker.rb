@@ -12,7 +12,12 @@ class Cracker
 
   def crack_ciphertext
     shifts = get_crack_shifts(ciphertext)
-    shift_message(ciphertext, shifts)
+    shift_text(ciphertext, shifts)
+  end
+
+  def crack_key
+    keys = get_crack_keys(ciphertext, date)
+    create_crack_key(keys)
   end
 
 end

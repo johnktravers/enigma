@@ -3,17 +3,17 @@ require './lib/shiftable'
 class Decrypter
   include Shiftable
 
-  attr_reader :message, :key, :date
+  attr_reader :ciphertext, :key, :date
 
-  def initialize(message, key, date)
-    @message = message
+  def initialize(ciphertext, key, date)
+    @ciphertext = ciphertext
     @key = key
     @date = date
   end
 
-  def decrypt_message
+  def decrypt_ciphertext
     shifts = get_shifts.map { |shift| 27 - shift }
-    shift_message(shifts)
+    shift_text(@ciphertext, shifts)
   end
 
 end

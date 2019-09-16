@@ -17,21 +17,19 @@ class Enigma
       date: date }
   end
 
-  def decrypt(message, key, date = Date.today.strftime('%d%m%y'))
-    decrypter = Decrypter.new(message, key, date)
+  def decrypt(ciphertext, key, date = Date.today.strftime('%d%m%y'))
+    decrypter = Decrypter.new(ciphertext, key, date)
 
-    { decryption: decrypter.decrypt_message,
+    { decryption: decrypter.decrypt_ciphertext,
       key: key,
       date: date }
   end
 
   def crack(ciphertext, date = Date.today.strftime('%d%m%y'))
     cracker = Cracker.new(ciphertext, date)
-    shifts = cracker.get_crack_shifts(ciphertext)
-    keys = cracker.get_crack_keys(ciphertext, date)
 
-    { decryption: cracker.shift_message(ciphertext, shifts),
-      key: cracker.create_crack_key(keys),
+    { decryption: cracker.crack_ciphertext,
+      key: cracker.crack_key,
       date: date }
   end
 

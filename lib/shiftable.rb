@@ -83,7 +83,7 @@ module Shiftable
     aligned[0] + aligned[1][1] + aligned[2][1] + aligned[3][1]
   end
 
-  def shift_message(text = @message, shifts)
+  def shift_text(text, shifts)
     alphabet = ('a'..'z').to_a << ' '
     shifted_message = text.downcase.split('')
 

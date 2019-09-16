@@ -12,7 +12,7 @@ class Encrypter
   end
 
   def encrypt_message
-    shift_message(get_shifts)
+    shift_text(@message, get_shifts)
   end
 
 end

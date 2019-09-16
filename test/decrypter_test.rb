@@ -16,13 +16,13 @@ class DecrypterTest < Minitest::Test
   end
 
   def test_initialize
-    assert_equal 'keder ohulw', @decrypter.message
+    assert_equal 'keder ohulw', @decrypter.ciphertext
     assert_equal '02715', @decrypter.key
     assert_equal '040895', @decrypter.date
   end
 
   def test_decrypt_message
-    assert_equal 'hello world', @decrypter.decrypt_message
+    assert_equal 'hello world', @decrypter.decrypt_ciphertext
   end
 
 end

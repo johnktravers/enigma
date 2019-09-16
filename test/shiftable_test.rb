@@ -9,6 +9,7 @@ class ShiftableTest < Minitest::Test
 
   def setup
     @encrypter = Encrypter.new('HEllO woRLd eNd', '08304', '291018')
+    @cracked_keys = [-5, -12, 8, -4]
   end
 
   def test_get_keys
@@ -30,7 +31,8 @@ class ShiftableTest < Minitest::Test
 
   def test_get_crack_keys
     expected = [8, 2, 3, -23]
-    assert_equal expected, @encrypter.get_crack_keys('vjqtbeaweqihssi', '291018')
+    actual = @encrypter.get_crack_keys('vjqtbeaweqihssi', '291018')
+    assert_equal expected, actual
   end
 
   def test_possible_keys
@@ -40,19 +42,21 @@ class ShiftableTest < Minitest::Test
       ['08', '35', '62', '89'],
       ['23', '50', '77']
     ]
-    assert_equal expected, @encrypter.possible_keys([-5, -12, 8, -4])
+    assert_equal expected, @encrypter.possible_keys(@cracked_keys)
   end
 
   def test_align_keys
-    assert_equal ['49', '96', '62', '23'], @encrypter.align_keys([-5, -12, 8, -4])
+    expected = ['49', '96', '62', '23']
+    assert_equal expected, @encrypter.align_keys(@cracked_keys)
   end
 
   def test_create_crack_key
-    assert_equal '49623', @encrypter.create_crack_key([-5, -12, 8, -4])
+    assert_equal '49623', @encrypter.create_crack_key(@cracked_keys)
   end
 
-  def test_shift_message
-    assert_equal 'vjqtbeaweqihssi', @encrypter.shift_message([14, 86, 32, 8])
+  def test_shift_text
+    actual = @encrypter.shift_text(@encrypter.message, [14, 86, 32, 8])
+    assert_equal 'vjqtbeaweqihssi', actual
   end
 
 end

@@ -2,6 +2,7 @@ require 'date'
 require './lib/random_number_generator'
 require './lib/encrypter'
 require './lib/decrypter'
+require './lib/cracker'
 
 class Enigma
 
@@ -16,24 +17,20 @@ class Enigma
       date: date }
   end
 
-  def decrypt(message, key, date = Date.today.strftime('%d%m%y'))
-    decrypter = Decrypter.new(message, key, date)
+  def decrypt(ciphertext, key, date = Date.today.strftime('%d%m%y'))
+    decrypter = Decrypter.new(ciphertext, key, date)
 
-    { decryption: decrypter.decrypt_message,
+    { decryption: decrypter.decrypt_ciphertext,
       key: key,
       date: date }
   end
 
   def crack(ciphertext, date = Date.today.strftime('%d%m%y'))
+    cracker = Cracker.new(ciphertext, date)
 
-    decrypter = Decrypter.new(ciphertext, '00000', date)
-    shifts = decrypter.get_crack_shifts(ciphertext)
-    keys = decrypter.get_crack_keys(ciphertext, date)
-
-    { decryption: decrypter.shift_message(shifts),
-      key: decrypter.create_crack_key(keys),
+    { decryption: cracker.crack_ciphertext,
+      key: cracker.crack_key,
       date: date }
-
   end
 
 end

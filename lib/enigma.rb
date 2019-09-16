@@ -24,7 +24,7 @@ class Enigma
       date: date }
   end
 
-  def crack(ciphertext, date)
+  def crack(ciphertext, date = Date.today.strftime('%d%m%y'))
     key = '99999'
 
     100000.times do

@@ -43,6 +43,42 @@ module Shiftable
     keys
   end
 
+  def possible_keys(keys)
+    possible = []
+    keys.each_with_index do |key, index|
+      possible[index] = []
+      num = key % 27
+      until num >= 100
+        possible[index].push(num.to_s.rjust(2, '0'))
+        num += 27
+      end
+    end
+    possible
+  end
+
+  def align_keys(keys)
+    possible = possible_keys(keys)
+    aligned = []
+
+    possible[1].each do |key1|
+      aligned[2] = possible[2].find_all { |key2| key1[1] == key2[0] }
+    end
+
+    possible[1].each do |key1|
+      aligned[0] = possible[0].find_all { |key0| key0[1] == key1[0] }
+    end
+
+    aligned[0].each do |key0|
+      aligned[1] = possible[1].find_all { |key1| key0[1] == key1[0] }
+    end
+
+    aligned[2].each do |key2|
+      aligned[3] = possible[3].find_all { |key3| key2[1] == key3[0] }
+    end
+
+    aligned.flatten
+  end
+
   def shift_message(shifts)
     alphabet = ('a'..'z').to_a << ' '
     shifted_message = @message.downcase.split('')

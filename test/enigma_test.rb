@@ -80,8 +80,8 @@ class EnigmaTest < Minitest::Test
   def test_crack_with_message_and_date
     expected = {
       decryption: 'hello world end',
-      date: '291018',
-      key: '08304'
+      key: '08304',
+      date: '291018'
     }
     assert_equal expected, @enigma.crack('vjqtbeaweqihssi', '291018')
   end
@@ -95,11 +95,6 @@ class EnigmaTest < Minitest::Test
       date: '161185'
     }
     assert_equal expected, @enigma.crack('vykuzrjmnlomxqnbxqooc')
-  end
-
-  def test_crack_with_an_impossible_ciphertext
-    expected = "The ciphertext was uncrackable."
-    assert_equal expected, @enigma.crack('pkbcleurb sfhaqornwqz')
   end
 
 end

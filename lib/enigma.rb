@@ -25,14 +25,15 @@ class Enigma
   end
 
   def crack(ciphertext, date = Date.today.strftime('%d%m%y'))
-    key = '99999'
 
-    100000.times do
-      attempt = decrypt(ciphertext, key, date)
-      return attempt if attempt[:decryption][-4..-1] == ' end'
-      key = (key.to_i - 1).to_s.rjust(5, '0')
-    end
-    "The ciphertext was uncrackable."
+    decrypter = Decrypter.new(ciphertext, '00000', date)
+    shifts = decrypter.get_crack_shifts(ciphertext)
+    keys = decrypter.get_crack_keys(ciphertext, date)
+
+    { decryption: decrypter.shift_message(shifts),
+      key: decrypter.create_crack_key(keys),
+      date: date }
+
   end
 
 end

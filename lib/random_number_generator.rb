@@ -1,8 +1,9 @@
 class RandomNumberGenerator
 
-  # Generate number for any number of digits
-  def self.get_number
-    rand(100000).to_s.rjust(5, '0')
+  def self.get_number(num_digits = 5)
+    rand(10 ** num_digits)
+      .to_s
+      .rjust(num_digits, '0')
   end
 
 end

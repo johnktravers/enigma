@@ -33,6 +33,16 @@ module Shiftable
     shifts.rotate!(4 - (split.length % 4))
   end
 
+  def get_crack_keys(ciphertext, date)
+    keys = []
+    shifts = get_crack_shifts(ciphertext)
+    offsets = get_offsets(date)
+    shifts.each_with_index do |shift, index|
+      keys.push( -1 * shift - offsets[index])
+    end
+    keys
+  end
+
   def shift_message(shifts)
     alphabet = ('a'..'z').to_a << ' '
     shifted_message = @message.downcase.split('')

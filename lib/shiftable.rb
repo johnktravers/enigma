@@ -22,6 +22,17 @@ module Shiftable
       .map { |shifts| shifts[0] + shifts[1] }
   end
 
+  def get_crack_shifts(ciphertext)
+    alphabet = ('a'..'z').to_a << ' '
+    reversed = ciphertext.reverse.split('')
+    shifts = []
+    shifts[0] = alphabet.index('d') - alphabet.index(reversed[0])
+    shifts[1] = alphabet.index('n') - alphabet.index(reversed[1])
+    shifts[2] = alphabet.index('e') - alphabet.index(reversed[2])
+    shifts[3] = alphabet.index(' ') - alphabet.index(reversed[3])
+    shifts
+  end
+
   def shift_message(shifts)
     alphabet = ('a'..'z').to_a << ' '
     shifted_message = @message.downcase.split('')

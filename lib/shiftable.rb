@@ -79,6 +79,11 @@ module Shiftable
     aligned.flatten
   end
 
+  def create_crack_key(keys)
+    aligned = align_keys(keys)
+    aligned[0] + aligned[1][1] + aligned[2][1] + aligned[3][1]
+  end
+
   def shift_message(shifts)
     alphabet = ('a'..'z').to_a << ' '
     shifted_message = @message.downcase.split('')

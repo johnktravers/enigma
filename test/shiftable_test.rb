@@ -47,6 +47,10 @@ class ShiftableTest < Minitest::Test
     assert_equal ['49', '96', '62', '23'], @encrypter.align_keys([-5, -12, 8, -4])
   end
 
+  def test_create_crack_key
+    assert_equal '49623', @encrypter.create_crack_key([-5, -12, 8, -4])
+  end
+
   def test_shift_message
     assert_equal 'vjqtbeaweqihssi', @encrypter.shift_message([14, 86, 32, 8])
   end

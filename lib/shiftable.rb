@@ -1,14 +1,14 @@
 module Shiftable
 
-  def get_keys
-    [ @key[0..1].to_i,
-      @key[1..2].to_i,
-      @key[2..3].to_i,
-      @key[3..4].to_i ]
+  def get_keys(key = @key)
+    [ key[0..1].to_i,
+      key[1..2].to_i,
+      key[2..3].to_i,
+      key[3..4].to_i ]
   end
 
-  def get_offsets
-    digits = (@date.to_i ** 2).to_s
+  def get_offsets(date = @date)
+    digits = (date.to_i ** 2).to_s
 
     [ digits[-4].to_i,
       digits[-3].to_i,
@@ -24,13 +24,13 @@ module Shiftable
 
   def get_crack_shifts(ciphertext)
     alphabet = ('a'..'z').to_a << ' '
-    reversed = ciphertext.reverse.split('')
+    split = ciphertext.split('')
     shifts = []
-    shifts[0] = alphabet.index('d') - alphabet.index(reversed[0])
-    shifts[1] = alphabet.index('n') - alphabet.index(reversed[1])
-    shifts[2] = alphabet.index('e') - alphabet.index(reversed[2])
-    shifts[3] = alphabet.index(' ') - alphabet.index(reversed[3])
-    shifts
+    shifts[0] = alphabet.index(' ') - alphabet.index(split[-4])
+    shifts[1] = alphabet.index('e') - alphabet.index(split[-3])
+    shifts[2] = alphabet.index('n') - alphabet.index(split[-2])
+    shifts[3] = alphabet.index('d') - alphabet.index(split[-1])
+    shifts.rotate!(4 - (split.length % 4))
   end
 
   def shift_message(shifts)

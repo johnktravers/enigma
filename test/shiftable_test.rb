@@ -24,7 +24,7 @@ class ShiftableTest < Minitest::Test
   end
 
   def test_get_crack_shifts
-    expected = [-5, -5, -14, 19]
+    expected = [-14, -5, -5, 19]
     assert_equal expected, @encrypter.get_crack_shifts('vjqtbeaweqihssi')
   end
 

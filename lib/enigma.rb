@@ -25,14 +25,14 @@ class Enigma
   end
 
   def crack(ciphertext, date = Date.today.strftime('%d%m%y'))
-    decrypter = Decrypter.new(ciphertext.reverse, '00000', date)
 
+    decrypter = Decrypter.new(ciphertext, '00000', date)
     shifts = decrypter.get_crack_shifts(ciphertext)
-    decrypter.shift_message(shifts).reverse
 
-    { decryption: decrypter.shift_message(shifts).reverse,
+    { decryption: decrypter.shift_message(shifts),
       key: '00000',
       date: date }
+
   end
 
 end

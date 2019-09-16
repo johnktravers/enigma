@@ -28,9 +28,10 @@ class Enigma
 
     decrypter = Decrypter.new(ciphertext, '00000', date)
     shifts = decrypter.get_crack_shifts(ciphertext)
+    keys = decrypter.get_crack_keys(ciphertext, date)
 
     { decryption: decrypter.shift_message(shifts),
-      key: '00000',
+      key: decrypter.create_crack_key(keys),
       date: date }
 
   end

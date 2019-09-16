@@ -97,4 +97,9 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.crack('vykuzrjmnlomxqnbxqooc')
   end
 
+  def test_crack_with_an_impossible_ciphertext
+    expected = "The ciphertext was uncrackable."
+    assert_equal expected, @enigma.crack('pkbcleurb sfhaqornwqz')
+  end
+
 end

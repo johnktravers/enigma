@@ -32,6 +32,7 @@ class Enigma
       return attempt if attempt[:decryption][-4..-1] == ' end'
       key = (key.to_i - 1).to_s.rjust(5, '0')
     end
+    "The ciphertext was uncrackable."
   end
 
 end

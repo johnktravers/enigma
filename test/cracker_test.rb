@@ -8,7 +8,7 @@ require './lib/cracker'
 class CrackerTest < Minitest::Test
 
   def setup
-    @cracker = Cracker.new('vjqtbeaweqihssi', '291018')
+    @cracker = Cracker.new('vykuzrjmnlomxqnbxqooc', '161185')
     @cracked_keys = [-5, -12, 8, -4]
   end
 
@@ -17,16 +17,16 @@ class CrackerTest < Minitest::Test
   end
 
   def test_initialize
-    assert_equal 'vjqtbeaweqihssi', @cracker.ciphertext
-    assert_equal '291018', @cracker.date
+    assert_equal 'vykuzrjmnlomxqnbxqooc', @cracker.ciphertext
+    assert_equal '161185', @cracker.date
   end
 
   def test_crack_ciphertext
-    assert_equal 'hello world end', @cracker.crack_ciphertext
+    assert_equal 'what a lovely day end', @cracker.crack_ciphertext
   end
 
   def test_crack_key
-
+    assert_equal '49623', @cracker.crack_key
   end
 
 

@@ -60,7 +60,7 @@ class EnigmaTest < Minitest::Test
       key: '02715',
       date: '040895'
     }
-    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+    assert_equal expected, @enigma.decrypt('keder ohulw', '02715', '040895')
   end
 
   def test_decrypt_with_message_and_key
@@ -72,6 +72,34 @@ class EnigmaTest < Minitest::Test
       date: '161185'
     }
     assert_equal expected, @enigma.decrypt('bjqtngdeublaktx.', '02715')
+  end
+
+
+  #-----------Crack Tests-----------#
+
+  def test_crack_with_message_and_date
+    expected = {
+      decryption: 'hello world end',
+      date: '291018',
+      key: '08304'
+    }
+    assert_equal expected, @enigma.crack('vjqtbeaweqihssi', '291018')
+  end
+
+  def test_crack_with_message_only
+    Date.expects(:today).returns(Date.new(1985, 11, 16))
+
+    expected = {
+      decryption: 'what a lovely day end',
+      key: '49623',
+      date: '161185'
+    }
+    assert_equal expected, @enigma.crack('vykuzrjmnlomxqnbxqooc')
+  end
+
+  def test_crack_with_an_impossible_ciphertext
+    expected = "The ciphertext was uncrackable."
+    assert_equal expected, @enigma.crack('pkbcleurb sfhaqornwqz')
   end
 
 end

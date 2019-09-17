@@ -58,35 +58,73 @@ class Cracker
   end
 
   def align_keys(keys)
-    possible = possible_keys(keys)
-    aligned = []
-
-    possible[1].each do |key1|
-      aligned[2] = possible[2].find_all { |key2| key1[1] == key2[0] }
-    end
-
-    possible[1].each do |key1|
-      aligned[0] = possible[0].find_all { |key0| key0[1] == key1[0] }
-    end
-
-    aligned[0].each do |key0|
-      aligned[1] = possible[1].find_all { |key1| key0[1] == key1[0] }
-    end
-
-    aligned[2].each do |key2|
-      aligned[3] = possible[3].find_all { |key3| key2[1] == key3[0] }
-    end
-
-    aligned.flatten
+    aligned_keys = possible_keys(keys)
+    aligned_keys = delete_row_1_by_row_2(aligned_keys)
+    aligned_keys = delete_row_1_by_row_0(aligned_keys)
+    aligned_keys = delete_row_2_by_row_1(aligned_keys)
+    aligned_keys = delete_row_2_by_row_3(aligned_keys)
+    aligned_keys = delete_row_0_by_row_1(aligned_keys)
+    delete_row_3_by_row_2(aligned_keys).flatten
   end
 
   def create_crack_key(keys)
     aligned = align_keys(keys)
     if aligned.length == 4
       aligned[0] + aligned[1][1] + aligned[2][1] + aligned[3][1]
+    elsif aligned.length > 4
+      keys = [aligned[0]]
+      keys[1] = aligned.find { |num| keys[0][1] == num[0] }
+      keys[2] = aligned.find { |num| keys[1][1] == num[0] }
+      keys[3] = aligned.find { |num| keys[2][1] == num[0] }
+      keys[0] + keys[1][1] + keys[2][1] + keys[3][1]
     else
       '(No key found)'
     end
+  end
+
+
+  #------------Helper Helper Methods------------#
+
+  def delete_row_1_by_row_2(aligned_keys)
+    aligned_keys[1].delete_if do |key1|
+      aligned_keys[2].none? { |key2| key1[1] == key2[0] }
+    end
+    aligned_keys
+  end
+
+  def delete_row_2_by_row_1(aligned_keys)
+    aligned_keys[2].delete_if do |key2|
+      aligned_keys[1].none? { |key1| key1[1] == key2[0] }
+    end
+    aligned_keys
+  end
+
+  def delete_row_0_by_row_1(aligned_keys)
+    aligned_keys[0].delete_if do |key0|
+      aligned_keys[1].none? { |key1| key0[1] == key1[0] }
+    end
+    aligned_keys
+  end
+
+  def delete_row_1_by_row_0(aligned_keys)
+    aligned_keys[1].delete_if do |key1|
+      aligned_keys[0].none? { |key0| key0[1] == key1[0] }
+    end
+    aligned_keys
+  end
+
+  def delete_row_3_by_row_2(aligned_keys)
+    aligned_keys[3].delete_if do |key3|
+      aligned_keys[2].none? { |key2| key2[1] == key3[0] }
+    end
+    aligned_keys
+  end
+
+  def delete_row_2_by_row_3(aligned_keys)
+    aligned_keys[2].delete_if do |key2|
+      aligned_keys[3].none? { |key3| key2[1] == key3[0] }
+    end
+    aligned_keys
   end
 
 end

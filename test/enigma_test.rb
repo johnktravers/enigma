@@ -102,7 +102,7 @@ class EnigmaTest < Minitest::Test
 
     expected = {
       decryption: 'what a lovely day end',
-      key: 'No key found',
+      key: '(No key found)',
       date: '160919'
     }
     assert_equal expected, @enigma.crack('vykuzrjmnlomxqnbxqooc')

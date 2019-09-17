@@ -71,6 +71,12 @@ class Cracker
     aligned = align_keys(keys)
     if aligned.length == 4
       aligned[0] + aligned[1][1] + aligned[2][1] + aligned[3][1]
+    elsif aligned.length > 4
+      keys = [aligned[0]]
+      keys[1] = aligned.find { |num| keys[0][1] == num[0] }
+      keys[2] = aligned.find { |num| keys[1][1] == num[0] }
+      keys[3] = aligned.find { |num| keys[2][1] == num[0] }
+      keys[0] + keys[1][1] + keys[2][1] + keys[3][1]
     else
       '(No key found)'
     end

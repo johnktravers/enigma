@@ -52,15 +52,27 @@ class CrackerTest < Minitest::Test
       ['23', '50', '77']
     ]
     assert_equal expected, @cracker.possible_keys(@cracked_keys)
+
+    expected = [
+      ["21", "48", "75"],
+      ["00", "27", "54", "81"],
+      ["13", "40", "67", "94"],
+      ["09", "36", "63", "90"]
+    ]
+    assert_equal expected, @cracker.possible_keys([-6, 0, -14, 9])
   end
 
   def test_align_keys
     expected = ['49', '96', '62', '23']
     assert_equal expected, @cracker.align_keys(@cracked_keys)
+
+    expected = ["48", "75", "54", "81", "13", "40", "09", "36"]
+    assert_equal expected, @cracker.align_keys([-6, 0, -14, 9])
   end
 
   def test_create_crack_key
     assert_equal '49623', @cracker.create_crack_key(@cracked_keys)
+    assert_equal '48136', @cracker.create_crack_key([-6, 0, -14, 9])
   end
 
 end

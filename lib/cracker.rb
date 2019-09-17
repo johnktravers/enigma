@@ -85,7 +85,7 @@ class Cracker
     if aligned.length == 4
       aligned[0] + aligned[1][1] + aligned[2][1] + aligned[3][1]
     else
-      'No key found'
+      '(No key found)'
     end
   end
 

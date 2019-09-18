@@ -44,7 +44,7 @@ class ShiftableTest < Minitest::Test
     shifted_alphas = shifts.map { |shift| alphabet.rotate(shift) }
 
     actual = @encrypter.shift(message_chars, shifted_alphas)
-    assert_equal "mspsmogd.jxnajqqjjnnz?pdsn", actual
+    assert_equal 'mspsmogd.jxnajqqjjnnz?pdsn', actual
   end
 
 end

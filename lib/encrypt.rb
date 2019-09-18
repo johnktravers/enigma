@@ -20,4 +20,6 @@ encrypted_file = File.open(encryption_path, 'w')
 encrypted_file.write(encrypted[:encryption])
 encrypted_file.close
 
-puts "Created '#{encryption_path}' with the key #{encrypted[:key]} and date #{encrypted[:date]}"
+key = encrypted[:key]
+date = encrypted[:date]
+puts "Created '#{encryption_path}' with the key #{key} and date #{date}"

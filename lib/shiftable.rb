@@ -18,22 +18,26 @@ module Shiftable
   def get_shifts(keys = get_keys, date = @date)
     keys
       .zip(get_offsets(date))
-      .map { |shifts| shifts[0] + shifts[1] }
+      .map { |shifts| (shifts[0] + shifts[1]) % 27 }
   end
 
   def shift_text(text, shifts)
-    alphabet = ('a'..'z').to_a << ' '
-    shifted_message = text.downcase.split('')
+    message_chars = text.downcase.split('')
+    shifted_alphas = shifts.map { |shift| @alphabet.rotate(shift) }
+    shift(message_chars, shifted_alphas)
+  end
 
-    shifted_message.each_with_index do |char, index|
-      if alphabet.include?(char)
-        alpha_index = alphabet.index(char)
-        shifted_alpha = alphabet.rotate(shifts[index % 4])
-        shifted_message[index] = shifted_alpha[alpha_index]
+
+  #-------------Helper Methods-------------#
+
+  def shift(message_chars, shifted_alphas)
+    message_chars.each_with_index do |char, index|
+      if shifted_alphas[0].include?(char)
+        alpha_index = @alphabet.index(char)
+        message_chars[index] = shifted_alphas[index % 4][alpha_index]
       end
     end
-
-    shifted_message.join('')
+    message_chars.join('')
   end
 
 end

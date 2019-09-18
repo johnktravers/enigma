@@ -15,9 +15,9 @@ module Shiftable
       digits[-1].to_i ]
   end
 
-  def get_shifts
-    get_keys
-      .zip(get_offsets)
+  def get_shifts(keys = get_keys, date = @date)
+    keys
+      .zip(get_offsets(date))
       .map { |shifts| shifts[0] + shifts[1] }
   end
 

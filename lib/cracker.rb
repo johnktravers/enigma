@@ -46,7 +46,6 @@ class Cracker
 
   def create_crack_key(keys)
     filtered = filter_key_combos(keys)
-
     if filtered.length == 1
       filtered.flatten!
       return filtered[0] + filtered[1][1] + filtered[2][1] + filtered[3][1]
@@ -65,28 +64,27 @@ class Cracker
 
   #------------Helper Helper Methods------------#
 
-  def possible_keys(keys)
-    possible = Array.new(4) { Array.new }
-    keys.each_with_index do |key, index|
-      num = key % 27
-      until num >= 100
-        possible[index].push(num.to_s.rjust(2, '0'))
-        num += 27
-      end
-    end
-    possible
-  end
-
-  def key_combinations(keys)
-    possible_keys = possible_keys(keys)
-    possible_keys[0].product(possible_keys[1], possible_keys[2], possible_keys[3])
-  end
-
   def filter_key_combos(keys)
     combos = key_combinations(keys)
     combos.find_all do |combo|
       combo[0][1] == combo[1][0] && combo[1][1] == combo[2][0] && combo[2][1] == combo[3][0]
     end
+  end
+
+  def key_combinations(keys)
+    maybe_keys = possible_keys(keys)
+    maybe_keys[0].product(maybe_keys[1], maybe_keys[2], maybe_keys[3])
+  end
+
+  def possible_keys(keys)
+    possible = Array.new(4) { Array.new }
+    keys.each_with_index do |key, index|
+      until key >= 100
+        possible[index].push(key.to_s.rjust(2, '0'))
+        key += 27
+      end
+    end
+    possible
   end
 
 end

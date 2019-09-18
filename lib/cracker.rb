@@ -50,17 +50,21 @@ class Cracker
       filtered.flatten!
       return filtered[0] + filtered[1][1] + filtered[2][1] + filtered[3][1]
     elsif filtered.length > 1
-      filtered.each do |key_arr|
-        keys_attempt = key_arr.map { |key| key.to_i }
-        if shift_text(@ciphertext, get_shifts(keys_attempt, @date))
-          return key_arr[0] + key_arr[1][1] + key_arr[2][1] + key_arr[3][1]
-        end
-      end
+      return check_shift_text(filtered) if check_shift_text(filtered)
     else
       '(No key found)'
     end
   end
 
+  def check_shift_text(filtered)
+    filtered.each do |key_arr|
+      keys_attempt = key_arr.map { |key| key.to_i }
+      if shift_text(@ciphertext, get_shifts(keys_attempt, @date))
+        return key_arr[0] + key_arr[1][1] + key_arr[2][1] + key_arr[3][1]
+      end
+    end
+    nil
+  end
 
   #------------Helper Helper Methods------------#
 

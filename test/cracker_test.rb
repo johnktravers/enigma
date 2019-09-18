@@ -86,4 +86,12 @@ class CrackerTest < Minitest::Test
     assert_equal '48136', @cracker.create_crack_key([21, 0, 13, 9])
   end
 
+  def test_check_shift_text
+    filtered = [
+      ["48", "81", "13", "36"],
+      ["75", "54", "40", "09"]
+    ]
+    assert_equal "48136", @cracker.check_shift_text(filtered)
+  end
+
 end

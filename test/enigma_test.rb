@@ -97,7 +97,7 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.crack('vykuzrjmnlomxqnbxqooc')
   end
 
-  def test_crack_with_message_only_and_todays_date
+  def test_crack_with_no_possible_key
     Date.expects(:today).returns(Date.new(2019, 9, 16))
 
     expected = {

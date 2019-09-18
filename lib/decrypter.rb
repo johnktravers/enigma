@@ -9,6 +9,7 @@ class Decrypter
     @ciphertext = ciphertext
     @key = key
     @date = date
+    @alphabet = ('a'..'z').to_a << ' '
   end
 
   def decrypt_ciphertext

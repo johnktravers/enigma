@@ -8,6 +8,7 @@ class Cracker
   def initialize(ciphertext, date)
     @ciphertext = ciphertext
     @date = date
+    @alphabet = ('a'..'z').to_a << ' '
   end
 
   def crack_ciphertext
@@ -24,13 +25,12 @@ class Cracker
   #------------Helper Methods------------#
 
   def get_crack_shifts(ciphertext)
-    alphabet = ('a'..'z').to_a << ' '
     split = ciphertext.split('')
     shifts = []
-    shifts[0] = alphabet.index(' ') - alphabet.index(split[-4])
-    shifts[1] = alphabet.index('e') - alphabet.index(split[-3])
-    shifts[2] = alphabet.index('n') - alphabet.index(split[-2])
-    shifts[3] = alphabet.index('d') - alphabet.index(split[-1])
+    shifts[0] = @alphabet.index(' ') - @alphabet.index(split[-4])
+    shifts[1] = @alphabet.index('e') - @alphabet.index(split[-3])
+    shifts[2] = @alphabet.index('n') - @alphabet.index(split[-2])
+    shifts[3] = @alphabet.index('d') - @alphabet.index(split[-1])
     shifts.rotate!(4 - (split.length % 4))
   end
 

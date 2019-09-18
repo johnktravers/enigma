@@ -23,18 +23,17 @@ module Shiftable
 
   def shift_text(text, shifts)
     message_chars = text.downcase.split('')
-    alphabet = ('a'..'z').to_a << ' '
-    shifted_alphas = shifts.map { |shift| alphabet.rotate(shift) }
-    shift(message_chars, alphabet, shifted_alphas)
+    shifted_alphas = shifts.map { |shift| @alphabet.rotate(shift) }
+    shift(message_chars, shifted_alphas)
   end
 
 
   #-------------Helper Methods-------------#
 
-  def shift(message_chars, alphabet, shifted_alphas)
+  def shift(message_chars, shifted_alphas)
     message_chars.each_with_index do |char, index|
       if shifted_alphas[0].include?(char)
-        alpha_index = alphabet.index(char)
+        alpha_index = @alphabet.index(char)
         message_chars[index] = shifted_alphas[index % 4][alpha_index]
       end
     end

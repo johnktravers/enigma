@@ -9,6 +9,7 @@ class Encrypter
     @message = message
     @key = key
     @date = date
+    @alphabet = ('a'..'z').to_a << ' '
   end
 
   def encrypt_message

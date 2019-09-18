@@ -46,32 +46,23 @@ class Cracker
 
   def create_crack_key(keys)
     filtered = filter_key_combos(keys)
-    if filtered.length == 1
-      filtered.flatten!
-      return filtered[0] + filtered[1][1] + filtered[2][1] + filtered[3][1]
-    elsif filtered.length > 1
-      return check_shift_text(filtered) if check_shift_text(filtered)
+    if filtered.length >= 1
+      keys = filtered[0]
+      keys[0] + keys[1][1] + keys[2][1] + keys[3][1]
     else
       '(No key found)'
     end
   end
 
-  def check_shift_text(filtered)
-    filtered.each do |key_arr|
-      keys_attempt = key_arr.map { |key| key.to_i }
-      if shift_text(@ciphertext, get_shifts(keys_attempt, @date))
-        return key_arr[0] + key_arr[1][1] + key_arr[2][1] + key_arr[3][1]
-      end
-    end
-    nil
-  end
 
   #------------Helper Helper Methods------------#
 
   def filter_key_combos(keys)
     combos = key_combinations(keys)
     combos.find_all do |combo|
-      combo[0][1] == combo[1][0] && combo[1][1] == combo[2][0] && combo[2][1] == combo[3][0]
+      combo[0][1] == combo[1][0] &&
+      combo[1][1] == combo[2][0] &&
+      combo[2][1] == combo[3][0]
     end
   end
 

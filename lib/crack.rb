@@ -22,4 +22,5 @@ crack_file = File.open(crack_path, 'w')
 crack_file.write(cracked[:decryption])
 crack_file.close
 
-puts "Created '#{crack_path}' with the cracked key #{cracked[:key]} and date #{date}"
+key = cracked[:key]
+puts "Created '#{crack_path}' with the cracked key #{key} and date #{date}"

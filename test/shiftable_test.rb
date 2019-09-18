@@ -34,4 +34,17 @@ class ShiftableTest < Minitest::Test
     assert_equal 'vjqtbeaweqihssi', actual
   end
 
+
+  #-------------Tests for Helper Methods-------------#
+
+  def test_shift
+    message_chars = 'hi there. how are you? end'.split('')
+    alphabet = ('a'..'z').to_a << ' '
+    shifts = [5, 10, 16, 26]
+    shifted_alphas = shifts.map { |shift| alphabet.rotate(shift) }
+
+    actual = @encrypter.shift(message_chars, alphabet, shifted_alphas)
+    assert_equal "mspsmogd.jxnajqqjjnnz?pdsn", actual
+  end
+
 end

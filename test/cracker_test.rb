@@ -42,22 +42,20 @@ class CrackerTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_possible_keys
-    expected = [
-      ['22', '49', '76'],
-      ['15', '42', '69', '96'],
-      ['08', '35', '62', '89'],
-      ['23', '50', '77']
-    ]
-    assert_equal expected, @cracker.possible_keys([22, 15, 8, 23])
+  def test_create_crack_key
+    assert_equal '49623', @cracker.create_crack_key([22, 15, 8, 23])
+    assert_equal '48136', @cracker.create_crack_key([21, 0, 13, 9])
+  end
 
-    expected = [
-      ['21', '48', '75'],
-      ['00', '27', '54', '81'],
-      ['13', '40', '67', '94'],
-      ['09', '36', '63', '90']
-    ]
-    assert_equal expected, @cracker.possible_keys([21, 0, 13, 9])
+
+  #------------Tests for Helper Helper Methods------------#
+
+  def test_filter_key_combos
+    expected = [['49', '96', '62', '23']]
+    assert_equal expected, @cracker.filter_key_combos([22, 15, 8, 23])
+
+    expected = [['48', '81', '13', '36'], ['75', '54', '40', '09']]
+    assert_equal expected, @cracker.filter_key_combos([21, 0, 13, 9])
   end
 
   def test_key_combinations
@@ -70,20 +68,14 @@ class CrackerTest < Minitest::Test
     assert_equal expected, @cracker.key_combinations([21, 0, 13, 9])[191]
   end
 
-  def test_filter_key_combos
-    expected = [['49', '96', '62', '23']]
-    assert_equal expected, @cracker.filter_key_combos([22, 15, 8, 23])
-
+  def test_possible_keys
     expected = [
-      ['48', '81', '13', '36'],
-      ['75', '54', '40', '09']
+      ['21', '48', '75'],
+      ['00', '27', '54', '81'],
+      ['13', '40', '67', '94'],
+      ['09', '36', '63', '90']
     ]
-    assert_equal expected, @cracker.filter_key_combos([21, 0, 13, 9])
-  end
-
-  def test_create_crack_key
-    assert_equal '49623', @cracker.create_crack_key([22, 15, 8, 23])
-    assert_equal '48136', @cracker.create_crack_key([21, 0, 13, 9])
+    assert_equal expected, @cracker.possible_keys([21, 0, 13, 9])
   end
 
 end

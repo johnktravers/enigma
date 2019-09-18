@@ -67,19 +67,25 @@ class Cracker
   end
 
   def key_combinations(keys)
-    maybe_keys = possible_keys(keys)
-    maybe_keys[0].product(maybe_keys[1], maybe_keys[2], maybe_keys[3])
+    possible_keys = possible_keys(keys)
+    possible_keys[0]
+      .product(possible_keys[1], possible_keys[2], possible_keys[3])
   end
 
   def possible_keys(keys)
     possible = Array.new(4) { Array.new }
     keys.each_with_index do |key, index|
-      until key >= 100
-        possible[index].push(key.to_s.rjust(2, '0'))
-        key += 27
-      end
+      add_possible_keys(possible, key, index)
     end
     possible
+  end
+
+  def add_possible_keys(possible_array, key, index)
+    until key >= 100
+      possible_array[index].push(key.to_s.rjust(2, '0'))
+      key += 27
+    end
+    possible_array
   end
 
 end

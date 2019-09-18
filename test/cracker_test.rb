@@ -78,4 +78,9 @@ class CrackerTest < Minitest::Test
     assert_equal expected, @cracker.possible_keys([21, 0, 13, 9])
   end
 
+  def test_add_possible_keys
+    expected = [[], ['13', '40', '67', '94']]
+    assert_equal expected, @cracker.add_possible_keys([[], []], 13, 1)
+  end
+
 end
